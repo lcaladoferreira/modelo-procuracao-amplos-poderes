@@ -1,10 +1,11 @@
 <!DOCTYPE html
 	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
+<link rel="stylesheet" href="./">
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>Easy Procurações</title>
+	<title>e-Proc</title>
 	<script src="angular.min.js"></script>
 	<script src="jspdf.js"></script>
 	<script src="jquery-1.7.1.min.js"></script>
@@ -78,7 +79,7 @@
 			padding-right: 100px;
 			padding-bottom: 100px;
 			padding-left: 100px;
-			
+
 		}
 
 		.thetitle {
@@ -127,22 +128,22 @@
 	<div id="site">
 		<!--Header -->
 		<div class="item-1 thetitle">
-			<h2>Modelo de Procuração com Amplos Poderes</h2>
+			<h2>Modelo de Procuração para representação em Junta Comercial</h2>
 		</div>
 		<!-- Menu -->
 		<div class="item-2">
 			<div id="theform">
 				<form>
-					<p>Preencha as seguintes informações:</p>
+					<p>Preencha as informações:</p>
 					<br>
 					<p>Razão Social:<br /> <input type="text" ng-model="companyname"></p>
 					<p>Endereço Comercial:<br /> <input type="text" ng-model="companyaddress"></p>
 					<p>Cidade:<br /> <input type="text" ng-model="companycity"></p>
 					<p>CNPJ:<br /> <input type="text" ng-model="companycode"></p>
 					<p>Nome do Sócio Representante:<br /> <input type="text" ng-model="companydirector"></p>
-					<p>CPF do Sócio Representante:<br /> <input type="text" ng-model="companydirector"></p>
+					<p>CPF do Sócio Representante:<br /> <input type="text" ng-model="companydirectorcpf"></p>
 					<p>Procurador:<br /> <input type="text" ng-model="tendername"></p>
-					<p>Endereço do Procurador:<br /> <input type="text" ng-model="tendernumber"></p>
+					<p>Endereço do Procurador:<br /> <input type="text" ng-model="tenderadds"></p>
 					<p>Data de Validade da Procuração:<br /> <input type="text" ng-model="tenderdate"></p>
 					<button onclick="makepdf()">CRIAR PDF</button>
 					<br><br>
@@ -158,58 +159,17 @@
 
 				<h3 class="thetitle"><b style="text-align:center;">PROCURAÇÃO</b></h3>
 
-				<p><b>{{companyname}}</b>, com endereço comercial, sito à {{companyaddress}}, {{companycity}},
+				<p><b>{{companyname}}</b>, com endereço comercial sito à {{companyaddress}}, {{companycity}},
 					inscrita no CNPJ sob o nº {{companycode}}, neste ato representado por <b>{{companydirector}}</b>,
-					inscrito no CPF n° {{companydirector}} e RG n°{{companydirector}},
-					constitui, como seu bastante procurador <b>{{tendername}} </b>, sito a {{tendernumber}}, com o fito de receber
-					posse, domínio, direitos e ação, responder ou obrigar terceiros a evicção legal; autorizar
-					registros, averbações e cancelamentos imobiliários, prestar declarações, bem como com os poderes
-					acima, adquirir e vender imóveis através do Sistema Financeiro de Habitação, notadamente as Caixas
-					Econômicas Federal e Estadual e outras; abrir, movimentar e encerrar contas correntes, de poupança e
-					outras junto aos Bancos e estabelecimentos de crédito em geral, notadamente Banco do Brasil, Banco
-					Central do Brasil e Caixas Econômicas Federal e Estadual, bem como instituições bancárias no
-					exterior, inclusive contas já existentes, podendo depositar e retirar importâncias e valores;
-					emitir, endossar e assinar cheques, ordens e recibos; solicitar cartões magnéticos, senhas, saldos,
-					extratos e talões de cheques; fazer remessa de numerários para o exterior, bem como autorizar a
-					entrada de numerários oriundos do exterior; efetuar operações de câmbio, assinar guias, papéis e
-					documentos para tanto necessários; emitir, endossar, aceitar, assinar, sacar, descontar, avalizar e
-					protestar letras de câmbio, duplicatas, notas promissórias; adquirir e resgatar quaisquer títulos de
-					crédito ou ações; receber lucros e dividendos de sociedades; assinar todos e quaisquer contratos,
-					papéis, ou documentos que impliquem em obrigação ou responsabilidade financeira para o(a)
-					outorgante, inclusive contratos de empréstimos, financiamento, abertura de crédito, penhor, fiança,
-					podendo especialmente solicitar em todos os bancos que se façam necessários microfilmagem de cheques
-					que envolvam o nome da outorgante e sua inscrição no Cadastro de Pessoa Física e outros não
-					especificamente previstos neste instrumento; cobrar, receber e pagar toda e qualquer importância que
-					a qualquer título seja devida ou das quais o(a) outorgante seja devedor(a) ou credor(a), passando
-					recibos e dando quitações; representá-lo(a) perante a Receita Federal, Delegacias Fiscais e
-					Regionais do Imposto de Renda, Secretaria da Receita Federal ou qualquer de suas delegacias, podendo
-					fazer, confeccionar e assinar sua declaração de Imposto de Renda, bem como requerer retificações,
-					receber restituições e efetuar pagamentos, requerer recadastramento de CPF e mais o que preciso for
-					de modo a ter sua situação regularizada; representá-lo(a) junto a quaisquer repartições públicas
-					federais, estaduais e municipais, entidades autárquicas e paraestatais, Cartórios de Registro Civil
-					de Pessoas Físicas e Jurídicas; Juntas Comerciais; DETRAN em todo o território nacional, sociedades
-					de economia mista, Consulados, Embaixadas, Prefeituras, INSS-INAMPS, Governos, Sindicatos,
-					Secretarias, Justiça Eleitoral, Consórcios, Faculdades, Universidades, outros estabelecimentos de
-					ensino, Empresas e Companhias Telefônicas, e onde mais preciso for, requerendo, promovendo, alegando
-					e assinando o que convier, inclusive requerer e retirar segunda via e internacional de carteira de
-					habilitação, podendo pagar impostos, taxas e emolumentos; requerer, ocorrer, concordar, discordar,
-					cumprir exigências, produzir provas, juntar e retirar documentos e vender veículos em nome do(a)
-					outorgante, podendo para tanto assinar recibos de venda, receber, dar quitação, pedir liberação dos
-					veículos, pagar as taxas que se fizerem necessárias; fazer e assinar declarações de bens e de
-					rendas, inclusive as declarações de anos anteriores; receber aposentadoria do Governo; dar e receber
-					quitações; acompanhar processos, interpor defesas e recursos; reclamar dos indevidos e receber
-					restituições de qualquer natureza, passando recibos e dando quitações; efetuar matrículas,
-					trancamentos e demais atos escolares; representá-lo(a) perante quaisquer sociedades das quais o(a)
-					mesmo seja ou venha a ser sócio(a), quotista ou acionista, investida que fica o(a)outorgado(a) de
-					todos os poderes conferidos por lei, pelos estatutos ou contratos sociais das mesmas sociedades,
-					representando-o(a) em assembléias ou reuniões, subscrevendo quotas ou ações, assinando papéis e
-					documentos; retirar correspondência, registradas com ou sem valor e vales postais na Empresa
-					Brasileira de Correios e Telégrafos; passar recibos e dar quitações; solicitar e retirar atestado de
-					antecedentes penais do(a) outorgante junto às Secretarias de Segurança Pública, bem como ao
-					Departamento da Polícia Federal, em todo território nacional e também representá-lo(a) perante a
-					Embaixada e os Consulados da Espanha no Brasil, podendo, para tanto, o(a) referido(a) procurador(a)
-					tudo apresentar e requerer, inclusive visto; constituir advogados, conferindo-lhes poderes para o
-					foro em geral, perante qualquer Juízo, Instância ou Tribunal. Todos os
+					inscrito no CPF n° {{companydirectorcpf}},
+					constitui, como seu bastante procurador <b>{{tendername}} </b>, sito a {{tenderadds}}, com o fito de
+					conferir-lhe os poderes para representá-lo perante a Junta Comercial do Estado, outorgando-lhe os especiais
+					poderes para deliberar transformação de natureza jurídica, aquisição, cessão de quotas e assinar declaração de 
+					desimpedimento, conforme art. 1.011 do Código Civil, além de assinar requerimentos de enquadramento de ME, 
+					declarações, contrato social, alteração, capa de processo e quaisquer documentos perante a Junta Comercial do Estado, 
+					bem como em nome da sociedade da qual participa o Outorgante, na qualidade de sócio, podendo ainda o Outorgado assinar
+					documentos e requerimentos necessários à instrução do ato respectivo, praticados com o uso de certificação digital, vedado
+					o substabelecimento a terceiros dos poderes ora conferidos. Todos os
 					dados desta procuração foram fornecidos e conferidos pelo (a) Outorgante, que por eles se
 					responsabiliza nos termos da lei, bem como por qualquer incorreção, responsabilizando-se por todos
 					os atos
@@ -220,7 +180,7 @@
 
 				<div>
 					<p class="spacer">____________________________________________________</p>
-					<p align="center"><b>(Assinatura do sócio com poderes de gerência no contrato social)</b></p>
+					<p align="center"><b>(Assinatura do Sócio Representante)</b></p>
 					<br>
 				</div>
 			</div>
@@ -231,20 +191,21 @@
 		<div class="item-4 thetitle">
 			<p>Você achou isso útil ou interessante? ...dê-me uma recomendação via <a
 					href="https://www.linkedin.com/in/lcaladoferreira/" target="_blank">Linkedin</a> ou <a
-					href="https://linktr.ee/lcaladoferreira" target="_blank">Linktree</a>  </p>
+					href="https://linktr.ee/lcaladoferreira" target="_blank">Linktree</a> </p>
 		</div>
 
 
 		<script>
 			var app = angular.module('myApp', []);
 			app.controller('myCtrl', function ($scope) {
-				$scope.companyname = "";
-				$scope.companyaddress = "";
-				$scope.companycity = "";
-				$scope.companycode = "";
-				$scope.companydirector = "";
-				$scope.tendernumber = "";
-				$scope.tendername = "";
+				$scope.companyname = "NOME DA EMPRESA";
+				$scope.companyaddress = "ENDEREÇO COMERCIAL";
+				$scope.companycity = "CIDADE";
+				$scope.companycode = "XX.XXX.XXX/XXXX-XX";
+				$scope.companydirector = "NOME DO REPRESENTANTE LEGAL";
+				$scope.companydirectorcpf = "XXX.XXX.XXX-XX";
+				$scope.tenderadds = "ENDEREÇO DO PROCURADOR";
+				$scope.tendername = "NOME DO PROCURADOR";
 				$scope.tenderdate = "DD/MM/AAAA";
 			});
 
