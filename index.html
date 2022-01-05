@@ -1,0 +1,268 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Procuração para Advogados</title>
+	<script src="angular.min.js"></script>
+	<script src="jspdf.js"></script>
+	<script src="jquery-1.7.1.min.js"></script>
+	<script src="FileSaver.js"></script>
+	<script src="jspdf.debug.js"></script>
+	<script src="jspdf.plugin.autotable.js"></script>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+	<style>
+		body {
+			margin: 0px;
+		}
+
+		.item-1 {
+			grid-area: header;
+			padding: 5px;
+			background-color: DarkBlue;
+			color: white;
+			font-family: "Times New Roman", Times, serif;
+
+		}
+
+		.item-2 {
+			grid-area: menu;
+			margin-left: 15px;
+			font-family: 'Nunito', sans-serif;
+
+
+
+		}
+
+		#theform {
+			border-radius: 25px;
+			border: thin solid DarkBlue;
+			padding: 20px;
+			margin: 5px;
+
+
+		}
+
+		.item-3 {
+			grid-area: main;
+			padding: 30px;
+			background-color: grey;
+			margin: 20px;
+			text-align: justify;
+
+		}
+
+		.item-4 {
+			grid-area: footer;
+			font-family: 'Nunito', sans-serif;
+		}
+
+		#site {
+			display: grid;
+			grid-template-areas:
+				'header header header header header header'
+				'menu menu main main main main'
+				'footer footer footer footer footer footer';
+			grid-gap: 10px;
+		}
+
+		#poa {
+			background-color: white;
+			padding-top: 100px;
+			padding-right: 100px;
+			padding-bottom: 100px;
+			padding-left: 100px;
+			
+		}
+
+		.thetitle {
+			text-align: center;
+		}
+
+		.spacer {
+			padding-top: 50px;
+			text-align: center;
+		}
+
+		input[type=text],
+		select {
+			border: thin solid blue;
+			padding: 2px;
+			margin: 3px;
+		}
+
+		input[type=text] {
+			border-radius: 25px;
+			width: 80%;
+		}
+
+		button {
+			color: white;
+			background-color: blue;
+			border: none;
+			border-radius: 25px;
+			padding: 10px;
+			width: 80%;
+		}
+
+		button:hover {
+			background-color: red;
+		}
+
+		.ufont {
+			font-family: 'Nunito', sans-serif;
+
+		}
+	</style>
+</head>
+
+<body ng-app="myApp" ng-controller="myCtrl">
+
+	<div id="site">
+		<!--Header -->
+		<div class="item-1 thetitle">
+			<h2>Modelo de Procuração com Amplos Poderes</h2>
+		</div>
+		<!-- Menu -->
+		<div class="item-2">
+			<div id="theform">
+				<form>
+					<p>Preencha as seguintes informações:</p>
+					<br>
+					<p>Razão Social:<br /> <input type="text" ng-model="companyname"></p>
+					<p>Endereço Comercial:<br /> <input type="text" ng-model="companyaddress"></p>
+					<p>Cidade:<br /> <input type="text" ng-model="companycity"></p>
+					<p>CNPJ:<br /> <input type="text" ng-model="companycode"></p>
+					<p>Nome do Sócio Representante:<br /> <input type="text" ng-model="companydirector"></p>
+					<p>CPF do Sócio Representante:<br /> <input type="text" ng-model="companydirector"></p>
+					<p>Procurador:<br /> <input type="text" ng-model="tendername"></p>
+					<p>Endereço do Procurador:<br /> <input type="text" ng-model="tendernumber"></p>
+					<p>Data de Validade da Procuração:<br /> <input type="text" ng-model="tenderdate"></p>
+					<button onclick="makepdf()">CRIAR PDF</button>
+					<br><br>
+					<p>Seus dados não serão salvos</p>
+					<p>Protegemos seus dados pessoais com o mais alto padrão de segurança.</p>
+					</ol>
+				</form>
+			</div>
+		</div>
+		<!--Document -->
+		<div class="item-3">
+			<div id="poa">
+
+				<h3 class="thetitle"><b style="text-align:center;">PROCURAÇÃO</b></h3>
+
+				<p><b>{{companyname}}</b>, com endereço comercial, sito à {{companyaddress}}, {{companycity}},
+					inscrita no CNPJ sob o nº {{companycode}}, neste ato representado por <b>{{companydirector}}</b>,
+					inscrito no CPF n° {{companydirector}} e RG n°{{companydirector}},
+					constitui, como seu bastante procurador <b>{{tendername}} </b>, sito a {{tendernumber}}, com o fito de receber
+					posse, domínio, direitos e ação, responder ou obrigar terceiros a evicção legal; autorizar
+					registros, averbações e cancelamentos imobiliários, prestar declarações, bem como com os poderes
+					acima, adquirir e vender imóveis através do Sistema Financeiro de Habitação, notadamente as Caixas
+					Econômicas Federal e Estadual e outras; abrir, movimentar e encerrar contas correntes, de poupança e
+					outras junto aos Bancos e estabelecimentos de crédito em geral, notadamente Banco do Brasil, Banco
+					Central do Brasil e Caixas Econômicas Federal e Estadual, bem como instituições bancárias no
+					exterior, inclusive contas já existentes, podendo depositar e retirar importâncias e valores;
+					emitir, endossar e assinar cheques, ordens e recibos; solicitar cartões magnéticos, senhas, saldos,
+					extratos e talões de cheques; fazer remessa de numerários para o exterior, bem como autorizar a
+					entrada de numerários oriundos do exterior; efetuar operações de câmbio, assinar guias, papéis e
+					documentos para tanto necessários; emitir, endossar, aceitar, assinar, sacar, descontar, avalizar e
+					protestar letras de câmbio, duplicatas, notas promissórias; adquirir e resgatar quaisquer títulos de
+					crédito ou ações; receber lucros e dividendos de sociedades; assinar todos e quaisquer contratos,
+					papéis, ou documentos que impliquem em obrigação ou responsabilidade financeira para o(a)
+					outorgante, inclusive contratos de empréstimos, financiamento, abertura de crédito, penhor, fiança,
+					podendo especialmente solicitar em todos os bancos que se façam necessários microfilmagem de cheques
+					que envolvam o nome da outorgante e sua inscrição no Cadastro de Pessoa Física e outros não
+					especificamente previstos neste instrumento; cobrar, receber e pagar toda e qualquer importância que
+					a qualquer título seja devida ou das quais o(a) outorgante seja devedor(a) ou credor(a), passando
+					recibos e dando quitações; representá-lo(a) perante a Receita Federal, Delegacias Fiscais e
+					Regionais do Imposto de Renda, Secretaria da Receita Federal ou qualquer de suas delegacias, podendo
+					fazer, confeccionar e assinar sua declaração de Imposto de Renda, bem como requerer retificações,
+					receber restituições e efetuar pagamentos, requerer recadastramento de CPF e mais o que preciso for
+					de modo a ter sua situação regularizada; representá-lo(a) junto a quaisquer repartições públicas
+					federais, estaduais e municipais, entidades autárquicas e paraestatais, Cartórios de Registro Civil
+					de Pessoas Físicas e Jurídicas; Juntas Comerciais; DETRAN em todo o território nacional, sociedades
+					de economia mista, Consulados, Embaixadas, Prefeituras, INSS-INAMPS, Governos, Sindicatos,
+					Secretarias, Justiça Eleitoral, Consórcios, Faculdades, Universidades, outros estabelecimentos de
+					ensino, Empresas e Companhias Telefônicas, e onde mais preciso for, requerendo, promovendo, alegando
+					e assinando o que convier, inclusive requerer e retirar segunda via e internacional de carteira de
+					habilitação, podendo pagar impostos, taxas e emolumentos; requerer, ocorrer, concordar, discordar,
+					cumprir exigências, produzir provas, juntar e retirar documentos e vender veículos em nome do(a)
+					outorgante, podendo para tanto assinar recibos de venda, receber, dar quitação, pedir liberação dos
+					veículos, pagar as taxas que se fizerem necessárias; fazer e assinar declarações de bens e de
+					rendas, inclusive as declarações de anos anteriores; receber aposentadoria do Governo; dar e receber
+					quitações; acompanhar processos, interpor defesas e recursos; reclamar dos indevidos e receber
+					restituições de qualquer natureza, passando recibos e dando quitações; efetuar matrículas,
+					trancamentos e demais atos escolares; representá-lo(a) perante quaisquer sociedades das quais o(a)
+					mesmo seja ou venha a ser sócio(a), quotista ou acionista, investida que fica o(a)outorgado(a) de
+					todos os poderes conferidos por lei, pelos estatutos ou contratos sociais das mesmas sociedades,
+					representando-o(a) em assembléias ou reuniões, subscrevendo quotas ou ações, assinando papéis e
+					documentos; retirar correspondência, registradas com ou sem valor e vales postais na Empresa
+					Brasileira de Correios e Telégrafos; passar recibos e dar quitações; solicitar e retirar atestado de
+					antecedentes penais do(a) outorgante junto às Secretarias de Segurança Pública, bem como ao
+					Departamento da Polícia Federal, em todo território nacional e também representá-lo(a) perante a
+					Embaixada e os Consulados da Espanha no Brasil, podendo, para tanto, o(a) referido(a) procurador(a)
+					tudo apresentar e requerer, inclusive visto; constituir advogados, conferindo-lhes poderes para o
+					foro em geral, perante qualquer Juízo, Instância ou Tribunal. Todos os
+					dados desta procuração foram fornecidos e conferidos pelo (a) Outorgante, que por eles se
+					responsabiliza nos termos da lei, bem como por qualquer incorreção, responsabilizando-se por todos
+					os atos
+					praticados no cumprimento deste instrumento, cessando os efeitos deste a partir de
+					<b>{{tenderdate}}</b>.
+				</p>
+				<br>
+
+				<div>
+					<p class="spacer">____________________________________________________</p>
+					<p align="center"><b>(Assinatura do sócio com poderes de gerência no contrato social)</b></p>
+					<br>
+				</div>
+			</div>
+
+		</div>
+		<div id="editor"></div>
+		<!--fotter -->
+		<div class="item-4 thetitle">
+			<p>Você achou isso útil ou interessante? ...dê-me uma recomendação via <a
+					href="https://www.linkedin.com/in/lcaladoferreira/" target="_blank">Linkedin</a> ou <a
+					href="https://linktr.ee/lcaladoferreira" target="_blank">Linktree</a>  </p>
+		</div>
+
+
+		<script>
+			var app = angular.module('myApp', []);
+			app.controller('myCtrl', function ($scope) {
+				$scope.companyname = "";
+				$scope.companyaddress = "";
+				$scope.companycity = "";
+				$scope.companycode = "";
+				$scope.companydirector = "";
+				$scope.tendernumber = "";
+				$scope.tendername = "";
+				$scope.tenderdate = "DD/MM/AAAA";
+			});
+
+			function makepdf() {
+
+				let doc = new jsPDF();
+				let specialElementHandlers = { '#editor': function (element, renderer) { return true; } };
+
+				doc.fromHTML($('#poa').html(), 15, 15, {
+					'width': 170,
+					'elementHandlers': specialElementHandlers,
+				});
+				doc.save('procuracao.pdf');
+
+			};
+
+		</script>
+
+</body>
+
+</html>
