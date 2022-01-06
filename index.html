@@ -28,17 +28,15 @@
 			padding: 5px;
 			background-color: DarkBlue;
 			color: white;
-			font-family: "Times New Roman", Times, serif;
+			font-family: Helvetica, Sans-Serif;
 
 		}
 
 		.item-2 {
 			grid-area: menu;
 			margin-left: 15px;
-			font-family: 'Nunito', sans-serif;
-
-
-
+			font-family: 'Helvetica', sans-serif;
+			width: auto
 		}
 
 		#theform {
@@ -128,27 +126,34 @@
 	<div id="site">
 		<!--Header -->
 		<div class="item-1 thetitle">
-			<h2>Modelo de Procuração para representação em Junta Comercial</h2>
+			<h2>Gerador de Procuração em PDF para Junta Comercial</h2>
 		</div>
 		<!-- Menu -->
 		<div class="item-2">
 			<div id="theform">
 				<form>
-					<p>Preencha as informações:</p>
-					<br>
 					<p>Razão Social:<br /> <input type="text" ng-model="companyname"></p>
-					<p>Endereço Comercial:<br /> <input type="text" ng-model="companyaddress"></p>
+					<p>End. Sede:<br /> <input type="text" ng-model="companyaddress"></p>
+					<p>Bairro:<br /> <input type="text" ng-model="companyaddressc"></p>
 					<p>Cidade:<br /> <input type="text" ng-model="companycity"></p>
 					<p>CNPJ:<br /> <input type="text" ng-model="companycode"></p>
-					<p>Nome do Sócio Representante:<br /> <input type="text" ng-model="companydirector"></p>
-					<p>CPF do Sócio Representante:<br /> <input type="text" ng-model="companydirectorcpf"></p>
+					<p>Representante:<br /> <input type="text" ng-model="companydirector"></p>
+					<p>Nacionalidade:<br /> <input type="text" ng-model="companydirectorn"></p>
+					<p>Estado Civil:<br /> <input type="text" ng-model="companydirectorc"></p>
+					<p>Cargo:<br /> <input type="text" ng-model="companydirectorj"></p>
+					<p>CPF do Representante:<br /> <input type="text" ng-model="companydirectorcpf"></p>
 					<p>Procurador:<br /> <input type="text" ng-model="tendername"></p>
-					<p>Endereço do Procurador:<br /> <input type="text" ng-model="tenderadds"></p>
-					<p>Data de Validade da Procuração:<br /> <input type="text" ng-model="tenderdate"></p>
+					<p>Nacionalidade:<br /> <input type="text" ng-model="tendern"></p>
+					<p>Estado Civil:<br /> <input type="text" ng-model="tendernc"></p>
+					<p>Profissão:<br /> <input type="text" ng-model="tendernj"></p>
+					<p>CPF do Procurador:<br /> <input type="text" ng-model="tendercpf"></p>
+					<p>End. Procurador:<br /> <input type="text" ng-model="tenderadds"></p>
+					<p>Bairro:<br /> <input type="text" ng-model="tenderc"></p>
+					<p>Cidade:<br /> <input type="text" ng-model="tendercd"></p>
+					<p>Data de Validade:<br /> <input type="text" ng-model="tenderdate"></p>
 					<button onclick="makepdf()">CRIAR PDF</button>
 					<br><br>
-					<p>Seus dados não serão salvos</p>
-					<p>Protegemos seus dados pessoais com o mais alto padrão de segurança.</p>
+					<p>Seus dados NÃO SERÃO salvos e estão protegidos com o mais alto padrão de segurança.</p>
 					</ol>
 				</form>
 			</div>
@@ -158,17 +163,29 @@
 			<div id="poa">
 
 				<h3 class="thetitle"><b style="text-align:center;">PROCURAÇÃO</b></h3>
+				<br>
 
-				<p><b>{{companyname}}</b>, com endereço comercial sito à {{companyaddress}}, {{companycity}},
+				<p><b>{{companyname}}</b>, com endereço comercial sito à {{companyaddress}}, {{companyaddressc}},
+					{{companycity}},
 					inscrita no CNPJ sob o nº {{companycode}}, neste ato representado por <b>{{companydirector}}</b>,
-					inscrito no CPF n° {{companydirectorcpf}},
-					constitui, como seu bastante procurador <b>{{tendername}} </b>, sito a {{tenderadds}}, com o fito de
-					conferir-lhe os poderes para representá-lo perante a Junta Comercial do Estado, outorgando-lhe os especiais
-					poderes para deliberar transformação de natureza jurídica, aquisição, cessão de quotas e assinar declaração de 
-					desimpedimento, conforme art. 1.011 do Código Civil, além de assinar requerimentos de enquadramento de ME, 
-					declarações, contrato social, alteração, capa de processo e quaisquer documentos perante a Junta Comercial do Estado, 
-					bem como em nome da sociedade da qual participa o Outorgante, na qualidade de sócio, podendo ainda o Outorgado assinar
-					documentos e requerimentos necessários à instrução do ato respectivo, praticados com o uso de certificação digital, vedado
+					{{companydirectorn}},
+					{{companydirectorc}}, {{companydirectorj}}, inscrito no CPF n° {{companydirectorcpf}},
+					constitui, como seu bastante procurador(a) <b>{{tendername}} </b>, {{tendern}},
+					{{tendernc}}, {{tendernj}}, inscrito no CPF n° {{tendercpf}}, sito a
+					{{tenderadds}},
+					{{tenderc}}, {{tendercd}}, com o fito de
+					conferir-lhe os poderes para representá-lo perante a Junta Comercial do Estado, outorgando-lhe os
+					especiais
+					poderes para deliberar transformação de natureza jurídica, aquisição, cessão de quotas e assinar
+					declaração de
+					desimpedimento, conforme art. 1.011 do Código Civil, além de assinar requerimentos de enquadramento
+					de ME,
+					declarações, contrato social, alteração, capa de processo e quaisquer documentos perante a Junta
+					Comercial do Estado,
+					bem como em nome da sociedade da qual participa o Outorgante, na qualidade de sócio, podendo ainda o
+					Outorgado assinar
+					documentos e requerimentos necessários à instrução do ato respectivo, praticados com o uso de
+					certificação digital, vedado
 					o substabelecimento a terceiros dos poderes ora conferidos. Todos os
 					dados desta procuração foram fornecidos e conferidos pelo (a) Outorgante, que por eles se
 					responsabiliza nos termos da lei, bem como por qualquer incorreção, responsabilizando-se por todos
@@ -180,7 +197,7 @@
 
 				<div>
 					<p class="spacer">____________________________________________________</p>
-					<p align="center"><b>(Assinatura do Sócio Representante)</b></p>
+					<p align="center"><b>(Assinatura do Representante)</b></p>
 					<br>
 				</div>
 			</div>
@@ -189,7 +206,7 @@
 		<div id="editor"></div>
 		<!--fotter -->
 		<div class="item-4 thetitle">
-			<p>Você achou isso útil ou interessante? ...dê-me uma recomendação via <a
+			<p>Você achou isso útil ou interessante? ...espero a sua visita no meu <a
 					href="https://www.linkedin.com/in/lcaladoferreira/" target="_blank">Linkedin</a> ou <a
 					href="https://linktr.ee/lcaladoferreira" target="_blank">Linktree</a> </p>
 		</div>
@@ -198,15 +215,25 @@
 		<script>
 			var app = angular.module('myApp', []);
 			app.controller('myCtrl', function ($scope) {
-				$scope.companyname = "NOME DA EMPRESA";
-				$scope.companyaddress = "ENDEREÇO COMERCIAL";
-				$scope.companycity = "CIDADE";
-				$scope.companycode = "XX.XXX.XXX/XXXX-XX";
-				$scope.companydirector = "NOME DO REPRESENTANTE LEGAL";
-				$scope.companydirectorcpf = "XXX.XXX.XXX-XX";
-				$scope.tenderadds = "ENDEREÇO DO PROCURADOR";
-				$scope.tendername = "NOME DO PROCURADOR";
-				$scope.tenderdate = "DD/MM/AAAA";
+				$scope.companyname = "";
+				$scope.companyaddress = "";
+				$scope.companyaddressc = "";
+				$scope.companycity = "";
+				$scope.companycode = "";
+				$scope.companydirector = "";
+				$scope.companydirectorn = "";
+				$scope.companydirectorc = "";
+				$scope.companydirectorj = "";
+				$scope.companydirectorcpf = "";
+				$scope.tendername = "";
+				$scope.tendern = "";
+				$scope.tendernc = "";
+				$scope.tendernj = "";
+				$scope.tendercpf = "";
+				$scope.tenderadds = "";
+				$scope.tenderc = "";
+				$scope.tendercd = "";
+				$scope.tenderdate = "";
 			});
 
 			function makepdf() {
