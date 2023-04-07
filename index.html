@@ -12,6 +12,7 @@
 	<script src="FileSaver.js"></script>
 	<script src="jspdf.debug.js"></script>
 	<script src="jspdf.plugin.autotable.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-mask/1.6.3/mask.js"></script>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
@@ -86,7 +87,7 @@
 
 		.spacer {
 			padding-top: 10px;
-			text-align: center;
+			text-align: left;
 		}
 
 		input[type=text],
@@ -100,6 +101,10 @@
 			border-radius: 25px;
 			width: 80%;
 		}
+
+		@media print {
+         body {font-family:georgia, times, serif; text-align: justify; align-items: center;}
+      }
 
 		button {
 			color: white;
@@ -118,6 +123,8 @@
 			font-family: 'Nunito', sans-serif;
 
 		}
+
+		
 	</style>
 </head>
 
@@ -136,24 +143,24 @@
 					<p>End. Sede:<br /> <input type="text" ng-model="companyaddress"></p>
 					<p>Bairro:<br /> <input type="text" ng-model="companyaddressc"></p>
 					<p>Cidade:<br /> <input type="text" ng-model="companycity"></p>
-					<p>CNPJ:<br /> <input type="text" ng-model="companycode"></p>
+					<p>CNPJ:<br /> <input type="text" ui-mask="99.999.999/9999-99" placeholder="99.999.999/9999-99" ng-model="companycode" style="text-align: center"></p>
 					<p>Representante:<br /> <input type="text" ng-model="companydirector"></p>
 					<p>Nacionalidade:<br /> <input type="text" ng-model="companydirectorn"></p>
 					<p>Estado Civil:<br /> <input type="text" ng-model="companydirectorc"></p>
 					<p>Cargo:<br /> <input type="text" ng-model="companydirectorj"></p>
-					<p>CPF do Representante:<br /> <input type="text" ng-model="companydirectorcpf"></p>
+					<p>CPF do Representante:<br /> <input type="text" ui-mask="999.999.999-99" placeholder="999.999.999-99" ng-model="companydirectorcpf" style="text-align: center"></p>
 					<p>Procurador:<br /> <input type="text" ng-model="tendername"></p>
 					<p>Nacionalidade:<br /> <input type="text" ng-model="tendern"></p>
 					<p>Estado Civil:<br /> <input type="text" ng-model="tendernc"></p>
 					<p>Profissão:<br /> <input type="text" ng-model="tendernj"></p>
-					<p>CPF do Procurador:<br /> <input type="text" ng-model="tendercpf"></p>
+					<p>CPF do Procurador:<br /> <input type="text"  ui-mask="999.999.999-99" placeholder="999.999.999-99" ng-model="tendercpf" style="text-align: center"></p>
 					<p>End. Procurador:<br /> <input type="text" ng-model="tenderadds"></p>
 					<p>Bairro:<br /> <input type="text" ng-model="tenderc"></p>
 					<p>Cidade:<br /> <input type="text" ng-model="tendercd"></p>
-					<p>Data de Validade:<br /> <input type="text" ng-model="tenderdate"></p>
+					<p>Data de Validade:<br /> <input type="date" ng-model="tenderdate" style="border-radius: 100px; width: 80%; border-color: blue; height: 34px; text-align: center"></p>
 					<button onclick="makepdf()">CRIAR PDF</button>
 					<br><br>
-					<p>Seus dados NÃO SERÃO salvos e estão protegidos com o mais alto padrão de segurança.</p>
+					<p>Seus dados NÃO SERÃO salvos. Esse app é isento de cookies</p>.</p>
 					</ol>
 				</form>
 			</div>
@@ -167,7 +174,7 @@
 
 				<p><b>{{companyname}}</b>, com endereço comercial sito à {{companyaddress}}, {{companyaddressc}},
 					{{companycity}},
-					inscrita no CNPJ sob o nº {{companycode}}, neste ato representado por <b>{{companydirector}}</b>,
+					inscrita no CNPJ sob o nº {{companycode }}, neste ato representado por <b>{{companydirector}}</b>,
 					{{companydirectorn}},
 					{{companydirectorc}}, {{companydirectorj}}, inscrito no CPF n° {{companydirectorcpf}},
 					constitui, como seu bastante procurador(a) <b>{{tendername}} </b>, {{tendern}},
@@ -191,13 +198,13 @@
 					responsabiliza nos termos da lei, bem como por qualquer incorreção, responsabilizando-se por todos
 					os atos
 					praticados no cumprimento deste instrumento, cessando os efeitos deste a partir de
-					<b>{{tenderdate}}</b>.
+					<b>{{tenderdate | date:'dd-MM-yyyy'}}</b>.
 				</p>
-				<br>
+			
 
 				<div>
 					<p class="spacer">________________________________________________ </p>
-					<p align="center"><b>{{companydirector}}</b><br>
+					<p align="left"><b>{{companydirector}}</b><br>
 					{{companydirectorj}}
 					</p>
 
@@ -216,7 +223,7 @@
 
 
 		<script>
-			var app = angular.module('myApp', []);
+			var app = angular.module('myApp', ['ui.mask']);
 			app.controller('myCtrl', function ($scope) {
 				$scope.companyname = "";
 				$scope.companyaddress = "";
@@ -238,14 +245,15 @@
 				$scope.tendercd = "";
 				$scope.tenderdate = "";
 			});
+			
 
 			function makepdf() {
 
 				let doc = new jsPDF();
 				let specialElementHandlers = { '#editor': function (element, renderer) { return true; } };
 
-				doc.fromHTML($('#poa').html(), 15, 15, {
-					'width': 170,
+				doc.fromHTML($('#poa').html(), 15, 20, {
+					'width': 180,
 					'elementHandlers': specialElementHandlers,
 				});
 				doc.save('procuracao.pdf');
