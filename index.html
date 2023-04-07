@@ -12,7 +12,9 @@
 	<script src="FileSaver.js"></script>
 	<script src="jspdf.debug.js"></script>
 	<script src="jspdf.plugin.autotable.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-mask/1.6.3/mask.js"></script>
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
@@ -145,17 +147,17 @@
 					<p>End. Sede:<br /> <input type="text" ng-model="companyaddress" style="text-align: center"></p>
 					<p>Bairro:<br /> <input type="text" ng-model="companyaddressc" style="text-align: center"></p>
 					<p>Cidade:<br /> <input type="text" ng-model="companycity" style="text-align: center"></p>
-					<p>CNPJ:<br /> <input type="text" ui-mask="99.999.999/9999-99" placeholder="99.999.999/9999-99" ng-model="companycode" style="text-align: center"></p>
+					<p>CNPJ:<br /> <input type="text" id="cnpj" class="mask-cnpj" placeholder="99.999.999/9999-99" ng-model="companycode" style="text-align: center"></p>
 					<p>Representante:<br /> <input type="text" ng-model="companydirector" style="text-align: center;"></p>
 					<p>Nacionalidade:<br /> <input type="text" ng-model="companydirectorn" style="text-align: center"></p>
 					<p>Estado Civil:<br /> <input type="text" ng-model="companydirectorc" style="text-align: center"></p>
 					<p>Cargo:<br /> <input type="text" ng-model="companydirectorj" style="text-align: center"></p>
-					<p>CPF do Representante:<br /> <input type="text" ui-mask="999.999.999-99" placeholder="999.999.999-99" ng-model="companydirectorcpf" style="text-align: center"></p>
+					<p>CPF do Representante:<br /> <input type="text" id="cpf" class="mask-cpf" placeholder="999.999.999-99" ng-model="companydirectorcpf" style="text-align: center"></p>
 					<p>Procurador:<br /> <input type="text" ng-model="tendername" style="text-align: center; text-transform: uppercase"></p>
 					<p>Nacionalidade:<br /> <input type="text" ng-model="tendern" style="text-align: center"></p>
 					<p>Estado Civil:<br /> <input type="text" ng-model="tendernc" style="text-align: center"></p>
 					<p>Profissão:<br /> <input type="text" ng-model="tendernj" style="text-align: center"></p>
-					<p>CPF do Procurador:<br /> <input type="text"  ui-mask="999.999.999-99" placeholder="999.999.999-99" ng-model="tendercpf" style="text-align: center"></p>
+					<p>CPF do Procurador:<br /> <input type="text" id="cpfProc" class="mask-cpf" placeholder="999.999.999-99" ng-model="tendercpf" style="text-align: center"></p>
 					<p>End. Procurador:<br /> <input type="text" ng-model="tenderadds" style="text-align: center" ></p>
 					<p>Bairro:<br /> <input type="text" ng-model="tenderc" style="text-align: center" ></p>
 					<p>Cidade:<br /> <input type="text" ng-model="tendercd" style="text-align: center" ></p>
@@ -177,7 +179,7 @@
 				<p>
 					<b>{{companyname | uppercase}}</b>, com endereço comercial sito à {{companyaddress}}, {{companyaddressc}}, {{companycity}}, inscrita no CNPJ sob o nº {{companycode }}, 
 					neste ato representado por <b>{{companydirector}}</b>, {{companydirectorn}}, {{companydirectorc}}, {{companydirectorj}}, inscrito no CPF n° {{companydirectorcpf}},
-					constitui, como seu bastante procurador(a)<b>{{tendername | uppercase}} </b>,{{tendern}},{{tendernc}},{{tendernj}}, inscrito no CPF n° {{tendercpf}}, sito a
+					constitui, como seu bastante procurador(a) <b>{{tendername | uppercase}} </b>,{{tendern}}, {{tendernc}}, {{tendernj}}, inscrito no CPF n° {{tendercpf}}, sito a
 					{{tenderadds}}, {{tenderc}}, {{tendercd}}, com o fito de conferir-lhe os poderes para representá-lo perante a Junta Comercial do Estado, outorgando-lhe os
 					especiais poderes para deliberar transformação de natureza jurídica, aquisição, cessão de quotas e assinar
 					declaração de desimpedimento, conforme art. 1.011 do Código Civil, além de assinar requerimentos de enquadramento
@@ -213,7 +215,7 @@
 
 
 		<script>
-			var app = angular.module('myApp', ['ui.mask']);
+			var app = angular.module('myApp', []);
 			app.controller('myCtrl', function ($scope) {
 				$scope.companyname = "";
 				$scope.companyaddress = "";
@@ -264,7 +266,30 @@
   });
 }
 
+$(document).ready(function(){
+  $('#cpf').mask('000.000.000-00', {reverse: true});
+});
 
+$(document).ready(function(){
+  $('#cpfProc').mask('000.000.000-00', {reverse: true});
+});
+
+$(document).ready(function(){
+  $('#cnpj').mask('00.000.000/0000-00', {reverse: true});
+});
+
+$(document).ready(function(){
+  $('#cep').mask('99999-999', {
+    onComplete: function(cep){
+      $.getJSON('https://viacep.com.br/ws/'+ cep +'/json/', function(data){
+        $('#logradouro').val(data.logradouro);
+        $('#bairro').val(data.bairro);
+        $('#cidade').val(data.localidade);
+        $('#estado').val(data.uf);
+      });
+    }
+  });
+});
 			
 
 		</script>
