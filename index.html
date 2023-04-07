@@ -86,7 +86,7 @@
 		}
 
 		.spacer {
-			padding-top: 10px;
+			margin: 0px;
 			text-align: left;
 		}
 
@@ -103,7 +103,7 @@
 		}
 
 		@media print {
-         body {font-family:georgia, times, serif; text-align: justify; align-items: center;}
+         body, #editor {font-family:georgia, times, serif; text-align: justify; align-items: center;}
       }
 
 		button {
@@ -139,24 +139,24 @@
 		<div class="item-2">
 			<div id="theform">
 				<form>
-					<p>Razão Social:<br /> <input type="text" ng-model="companyname"></p>
-					<p>End. Sede:<br /> <input type="text" ng-model="companyaddress"></p>
-					<p>Bairro:<br /> <input type="text" ng-model="companyaddressc"></p>
-					<p>Cidade:<br /> <input type="text" ng-model="companycity"></p>
+					<p>Razão Social:<br /> <input type="text" ng-model="companyname" style="text-align: center; text-transform: uppercase"></p>
+					<p>End. Sede:<br /> <input type="text" ng-model="companyaddress" style="text-align: center"></p>
+					<p>Bairro:<br /> <input type="text" ng-model="companyaddressc" style="text-align: center"></p>
+					<p>Cidade:<br /> <input type="text" ng-model="companycity" style="text-align: center"></p>
 					<p>CNPJ:<br /> <input type="text" ui-mask="99.999.999/9999-99" placeholder="99.999.999/9999-99" ng-model="companycode" style="text-align: center"></p>
-					<p>Representante:<br /> <input type="text" ng-model="companydirector"></p>
-					<p>Nacionalidade:<br /> <input type="text" ng-model="companydirectorn"></p>
-					<p>Estado Civil:<br /> <input type="text" ng-model="companydirectorc"></p>
-					<p>Cargo:<br /> <input type="text" ng-model="companydirectorj"></p>
+					<p>Representante:<br /> <input type="text" ng-model="companydirector" style="text-align: center;"></p>
+					<p>Nacionalidade:<br /> <input type="text" ng-model="companydirectorn" style="text-align: center"></p>
+					<p>Estado Civil:<br /> <input type="text" ng-model="companydirectorc" style="text-align: center"></p>
+					<p>Cargo:<br /> <input type="text" ng-model="companydirectorj" style="text-align: center"></p>
 					<p>CPF do Representante:<br /> <input type="text" ui-mask="999.999.999-99" placeholder="999.999.999-99" ng-model="companydirectorcpf" style="text-align: center"></p>
-					<p>Procurador:<br /> <input type="text" ng-model="tendername"></p>
-					<p>Nacionalidade:<br /> <input type="text" ng-model="tendern"></p>
-					<p>Estado Civil:<br /> <input type="text" ng-model="tendernc"></p>
-					<p>Profissão:<br /> <input type="text" ng-model="tendernj"></p>
+					<p>Procurador:<br /> <input type="text" ng-model="tendername" style="text-align: center; text-transform: uppercase"></p>
+					<p>Nacionalidade:<br /> <input type="text" ng-model="tendern" style="text-align: center"></p>
+					<p>Estado Civil:<br /> <input type="text" ng-model="tendernc" style="text-align: center"></p>
+					<p>Profissão:<br /> <input type="text" ng-model="tendernj" style="text-align: center"></p>
 					<p>CPF do Procurador:<br /> <input type="text"  ui-mask="999.999.999-99" placeholder="999.999.999-99" ng-model="tendercpf" style="text-align: center"></p>
-					<p>End. Procurador:<br /> <input type="text" ng-model="tenderadds"></p>
-					<p>Bairro:<br /> <input type="text" ng-model="tenderc"></p>
-					<p>Cidade:<br /> <input type="text" ng-model="tendercd"></p>
+					<p>End. Procurador:<br /> <input type="text" ng-model="tenderadds" style="text-align: center" ></p>
+					<p>Bairro:<br /> <input type="text" ng-model="tenderc" style="text-align: center" ></p>
+					<p>Cidade:<br /> <input type="text" ng-model="tendercd" style="text-align: center" ></p>
 					<p>Data de Validade:<br /> <input type="date" ng-model="tenderdate" style="border-radius: 100px; width: 80%; border-color: blue; height: 34px; text-align: center"></p>
 					<button onclick="makepdf()">CRIAR PDF</button>
 					<br><br>
@@ -172,12 +172,12 @@
 				<h3 class="thetitle"><b style="text-align:center;">PROCURAÇÃO</b></h3>
 				<br>
 
-				<p><b>{{companyname}}</b>, com endereço comercial sito à {{companyaddress}}, {{companyaddressc}},
+				<p><b>{{companyname | uppercase}}</b>, com endereço comercial sito à {{companyaddress}}, {{companyaddressc}},
 					{{companycity}},
 					inscrita no CNPJ sob o nº {{companycode }}, neste ato representado por <b>{{companydirector}}</b>,
 					{{companydirectorn}},
 					{{companydirectorc}}, {{companydirectorj}}, inscrito no CPF n° {{companydirectorcpf}},
-					constitui, como seu bastante procurador(a) <b>{{tendername}} </b>, {{tendern}},
+					constitui, como seu bastante procurador(a) <b>{{tendername | uppercase}} </b>, {{tendern}},
 					{{tendernc}}, {{tendernj}}, inscrito no CPF n° {{tendercpf}}, sito a
 					{{tenderadds}},
 					{{tenderc}}, {{tendercd}}, com o fito de
@@ -203,7 +203,7 @@
 			
 
 				<div>
-					<p class="spacer">________________________________________________ </p>
+					<p class="spacer">_____________________________</p>
 					<p align="left"><b>{{companydirector}}</b><br>
 					{{companydirectorj}}
 					</p>
