@@ -87,7 +87,7 @@
 
 		.spacer {
 			margin: 0px;
-			text-align: left;
+			text-align: center;
 		}
 
 		input[type=text],
@@ -101,10 +101,12 @@
 			border-radius: 25px;
 			width: 80%;
 		}
-
+ /* melhoria ao imprimir 
 		@media print {
-         body, #editor {font-family:georgia, times, serif; text-align: justify; align-items: center;}
+         #poa {text-align: justify; align-items: justify; width: 100%}
+		 #theform, .item-1, .item-4{visibility: hidden}
       }
+	  */
 
 		button {
 			color: white;
@@ -172,39 +174,27 @@
 				<h3 class="thetitle"><b style="text-align:center;">PROCURAÇÃO</b></h3>
 				<br>
 
-				<p><b>{{companyname | uppercase}}</b>, com endereço comercial sito à {{companyaddress}}, {{companyaddressc}},
-					{{companycity}},
-					inscrita no CNPJ sob o nº {{companycode }}, neste ato representado por <b>{{companydirector}}</b>,
-					{{companydirectorn}},
-					{{companydirectorc}}, {{companydirectorj}}, inscrito no CPF n° {{companydirectorcpf}},
-					constitui, como seu bastante procurador(a) <b>{{tendername | uppercase}} </b>, {{tendern}},
-					{{tendernc}}, {{tendernj}}, inscrito no CPF n° {{tendercpf}}, sito a
-					{{tenderadds}},
-					{{tenderc}}, {{tendercd}}, com o fito de
-					conferir-lhe os poderes para representá-lo perante a Junta Comercial do Estado, outorgando-lhe os
-					especiais
-					poderes para deliberar transformação de natureza jurídica, aquisição, cessão de quotas e assinar
-					declaração de
-					desimpedimento, conforme art. 1.011 do Código Civil, além de assinar requerimentos de enquadramento
-					de ME,
-					declarações, contrato social, alteração, capa de processo e quaisquer documentos perante a Junta
-					Comercial do Estado,
-					bem como em nome da sociedade da qual participa o Outorgante, na qualidade de sócio, podendo ainda o
-					Outorgado assinar
-					documentos e requerimentos necessários à instrução do ato respectivo, praticados com o uso de
-					certificação digital, vedado
-					o substabelecimento a terceiros dos poderes ora conferidos. Todos os
-					dados desta procuração foram fornecidos e conferidos pelo (a) Outorgante, que por eles se
-					responsabiliza nos termos da lei, bem como por qualquer incorreção, responsabilizando-se por todos
-					os atos
-					praticados no cumprimento deste instrumento, cessando os efeitos deste a partir de
-					<b>{{tenderdate | date:'dd-MM-yyyy'}}</b>.
+				<p>
+					<b>{{companyname | uppercase}}</b>, com endereço comercial sito à {{companyaddress}}, {{companyaddressc}}, {{companycity}}, inscrita no CNPJ sob o nº {{companycode }}, 
+					neste ato representado por <b>{{companydirector}}</b>, {{companydirectorn}}, {{companydirectorc}}, {{companydirectorj}}, inscrito no CPF n° {{companydirectorcpf}},
+					constitui, como seu bastante procurador(a)<b>{{tendername | uppercase}} </b>,{{tendern}},{{tendernc}},{{tendernj}}, inscrito no CPF n° {{tendercpf}}, sito a
+					{{tenderadds}}, {{tenderc}}, {{tendercd}}, com o fito de conferir-lhe os poderes para representá-lo perante a Junta Comercial do Estado, outorgando-lhe os
+					especiais poderes para deliberar transformação de natureza jurídica, aquisição, cessão de quotas e assinar
+					declaração de desimpedimento, conforme art. 1.011 do Código Civil, além de assinar requerimentos de enquadramento
+					de ME, declarações, contrato social, alteração, capa de processo e quaisquer documentos perante a Junta
+					Comercial do Estado, bem como em nome da sociedade da qual participa o Outorgante, na qualidade de sócio, podendo ainda o
+					Outorgado assinar documentos e requerimentos necessários à instrução do ato respectivo, praticados com o uso de
+					certificação digital, vedado o substabelecimento a terceiros dos poderes ora conferidos. Todos os
+					dados desta procuração foram fornecidos e conferidos pelo (a) Outorgante, que por eles se responsabiliza nos termos da lei, bem como por qualquer incorreção, responsabilizando-se por todos
+					os atos praticados no cumprimento deste instrumento, cessando os efeitos deste a partir de <b>{{tenderdate | date:'dd-MM-yyyy'}}</b>.
 				</p>
 			
 
 				<div>
+					<br>
+					<br>
 					<p class="spacer">_____________________________</p>
-					<p align="left"><b>{{companydirector}}</b><br>
+					<p align="center"><b>{{companydirector}}</b><br>
 					{{companydirectorj}}
 					</p>
 
@@ -248,17 +238,34 @@
 			
 
 			function makepdf() {
+  let doc = new jsPDF();
 
-				let doc = new jsPDF();
-				let specialElementHandlers = { '#editor': function (element, renderer) { return true; } };
+  html2canvas(document.querySelector("#poa"), { // Renderizar o HTML como canvas
+    onrendered: function(canvas) {
+      let imgData = canvas.toDataURL("image/jpeg", 1.0);
+      let imgWidth = 210; // Largura do PDF em mm (A4)
+      let pageHeight = 297; // Altura do PDF em mm (A4)
+      let imgHeight = canvas.height * imgWidth / canvas.width;
+      let heightLeft = imgHeight;
+      let position = 0;
 
-				doc.fromHTML($('#poa').html(), 15, 20, {
-					'width': 180,
-					'elementHandlers': specialElementHandlers,
-				});
-				doc.save('procuracao.pdf');
+      doc.addImage(imgData, 'JPEG', 0, position, imgWidth, imgHeight);
+      heightLeft -= pageHeight;
 
-			};
+      while (heightLeft >= 0) {
+        position = heightLeft - imgHeight;
+        doc.addPage();
+        doc.addImage(imgData, 'JPEG', 0, position, imgWidth, imgHeight);
+        heightLeft -= pageHeight;
+      }
+
+      doc.save('procuracao.pdf'); // Fazer o download do PDF
+    }
+  });
+}
+
+
+			
 
 		</script>
 
